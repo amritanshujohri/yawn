@@ -15,10 +15,6 @@ namespace yawn
     {
         signals_.add(SIGINT);
         signals_.add(SIGTERM);
-#if defined(SIGQUIT)
-        signals_.add(SIGQUIT);
-#endif // defined(SIGQUIT)
-
         do_await_stop();
 
         // Open the acceptor with the option to reuse the address (i.e. SO_REUSEADDR).
@@ -54,7 +50,7 @@ namespace yawn
 
                 if (!ec)
                 {
-                    connection_manager_.start(std::make_shared<connection>(
+                    connection_manager_.start(std::make_shared<Connection>(
                         std::move(socket_), connection_manager_, request_handler_));
                 }
 
@@ -74,9 +70,4 @@ namespace yawn
                 connection_manager_.stop_all();
             });
     }
-
-    SocketServer::~SocketServer()
-    {
-    }
-
 }
