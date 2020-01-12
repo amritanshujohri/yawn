@@ -41,5 +41,6 @@ namespace yawn
 
     std::string extension_to_type(const std::string& extension);
 
+
 }
 

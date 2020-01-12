@@ -157,6 +157,7 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="Reply.h" />
     <ClInclude Include="RequestHandler.h" />
+    <ClInclude Include="RequestParser.h" />
     <ClInclude Include="SocketServer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +172,7 @@
     </ClCompile>
     <ClCompile Include="Reply.cpp" />
     <ClCompile Include="RequestHandler.cpp" />
+    <ClCompile Include="RequestParser.cpp" />
     <ClCompile Include="SocketServer.cpp" />
     <ClCompile Include="yawn.cpp" />
   </ItemGroup>

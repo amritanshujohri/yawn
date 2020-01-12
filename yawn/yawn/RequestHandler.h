@@ -1,24 +1,27 @@
 #pragma once
 #include "pch.h"
+#include "Common.h"
 #include "Reply.h"
 
 namespace yawn
 {
-    class Request;
+
     class RequestHandler
     {
     public:
         explicit RequestHandler(RequestHandler&) = delete;
-        explicit RequestHandler(std::string doc_path);
-        ~RequestHandler();
+        RequestHandler(std::string doc_path): doc_root_(doc_path)
+        {
+
+        }
 
 
         /// Handle a request and produce a reply.
-        void handle_request(const Request& req, reply& rep);
+        void handle_request(const request& req, reply& rep);
 
     private:
         /// The directory containing the files to be served.
-        std::string doc_root_;
+        const std::string doc_root_;
 
         /// Perform URL-decoding on a string. Returns false if the encoding was
         /// invalid.

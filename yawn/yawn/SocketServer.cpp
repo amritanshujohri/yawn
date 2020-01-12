@@ -24,9 +24,9 @@ namespace yawn
         acceptor_.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
         acceptor_.bind(endpoint);
         acceptor_.listen();
-
-
+        do_accept();
     }
+
     void SocketServer::run()
     {
         // The io_service::run() call will block until all asynchronous operations

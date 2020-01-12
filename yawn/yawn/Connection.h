@@ -3,21 +3,28 @@
 #include <boost/asio.hpp>
 #include "Common.h"
 #include "Reply.h"
+#include "RequestHandler.h"
+#include "RequestParser.h"
 
 namespace yawn
 {
     class ConnectionManager;
-    class RequestHandler;
-    class RequestParser;
 
-    class Connection
+    class Connection 
+        : public std::enable_shared_from_this<Connection>
     {
     public:
         Connection(const Connection&) = delete;
         Connection& operator=(const Connection&) = delete;
         
         explicit Connection(boost::asio::ip::tcp::socket socket,
-            ConnectionManager& manager, RequestHandler& handler);
+            ConnectionManager& manager, RequestHandler& handler)
+            : socket_(std::move(socket)),
+            connection_manager_(manager),
+            request_handler_(handler)
+        {
+        }
+
         /// Start the first asynchronous operation for the connection.
         void start();
 
@@ -46,7 +53,7 @@ namespace yawn
         request request_;
 
         /// The parser for the incoming request.
-        RequestParser& request_parser_;
+        RequestParser request_parser_;
 
         /// The reply to be sent back to the client.
         reply reply_;
